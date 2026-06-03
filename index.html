@@ -210,7 +210,8 @@
         }
 
         .hamburger-menu {
-            height: 100%;
+            width: 44px;
+            height: 44px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -292,6 +293,22 @@
             visibility: hidden;
             pointer-events: none;
             z-index: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .card-nav-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .card-nav-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .card-nav-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 2px;
+        }
+        .card-nav-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.24);
         }
 
         .card-nav.open .card-nav-content {
@@ -467,7 +484,7 @@
 
         .hero-name {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(52px, 8vw, 96px);
+            font-size: clamp(38px, 8vw, 96px);
             font-weight: 700;
             line-height: 1.0;
             color: #ffffff;
@@ -1460,6 +1477,47 @@
             .timeline-dot-horizontal {
                 display: none;
             }
+
+            /* Mobile Card Padding Reductions */
+            .project-card {
+                padding: 18px 20px;
+                min-height: auto;
+            }
+
+            .education-card,
+            .experience-card {
+                padding: 18px 20px;
+            }
+
+            #hero-circuit {
+                width: 320px;
+                opacity: 0.35;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 16px;
+            }
+
+            .hero-ctas .cta-link-text {
+                text-align: center;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                padding: 12px 24px;
+                width: 100%;
+                display: inline-block;
+            }
+
+            .hero-ctas .cta-btn-outline {
+                width: 100%;
+            }
         }
 
         /* ── BASE REVEAL WRAPPERS ────────── */
@@ -2081,7 +2139,9 @@
                     contentEl.style.position = wasPosition;
                     contentEl.style.height = wasHeight;
 
-                    return topBar + contentHeight + padding;
+                    const totalHeight = topBar + contentHeight + padding;
+                    const maxNavHeight = window.innerHeight - (window.innerWidth <= 768 ? 32 : 48);
+                    return Math.min(totalHeight, maxNavHeight);
                 }
                 return 350;
             }

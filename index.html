@@ -174,10 +174,9 @@
         .card-nav-container {
             position: fixed;
             top: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 800px;
+            left: 24px;
+            width: 320px;
+            max-width: calc(100% - 48px);
             z-index: 1000;
             box-sizing: border-box;
         }
@@ -186,8 +185,10 @@
             display: block;
             height: 60px;
             padding: 0;
-            background-color: var(--color-surface);
-            border: 1px solid var(--color-border);
+            background-color: rgba(17, 17, 17, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 0.75rem;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             position: relative;
@@ -284,10 +285,10 @@
             right: 0;
             top: 60px;
             bottom: 0;
-            padding: 0.5rem;
+            padding: 8px;
             display: flex;
-            align-items: flex-end;
-            gap: 12px;
+            flex-direction: column;
+            gap: 8px;
             visibility: hidden;
             pointer-events: none;
             z-index: 1;
@@ -299,15 +300,15 @@
         }
 
         .nav-card {
-            height: 100%;
-            flex: 1 1 0;
-            min-width: 0;
+            height: auto;
+            min-height: 60px;
+            flex: 1 1 auto;
             border-radius: calc(0.75rem - 0.2rem);
             border: 1px solid var(--color-border);
             position: relative;
             display: flex;
             flex-direction: column;
-            padding: 16px 20px;
+            padding: 12px 16px;
             gap: 8px;
             user-select: none;
         }
@@ -360,8 +361,10 @@
 
         @media (max-width: 768px) {
             .card-nav-container {
-                width: 92%;
+                width: calc(100% - 32px);
                 top: 16px;
+                left: 16px;
+                transform: none;
             }
 
             .card-nav-top {
@@ -379,23 +382,6 @@
                 font-size: 11px;
                 padding: 0 1rem;
                 order: 1;
-            }
-
-            .card-nav-content {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-                padding: 0.5rem;
-                bottom: 0;
-                justify-content: flex-start;
-            }
-
-            .nav-card {
-                height: auto;
-                min-height: 60px;
-                flex: 1 1 auto;
-                max-height: none;
-                padding: 12px 16px;
             }
 
             .nav-card-label {
@@ -595,15 +581,15 @@
             width: clamp(450px, 50vw, 780px);
             height: auto;
             pointer-events: none;
-            opacity: 0.35;
+            opacity: 0.55;
             z-index: 0;
             border: none;
             border-radius: 0;
-            -webkit-mask-image: linear-gradient(to top left, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 80%),
-                                linear-gradient(to left, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top left, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 90%),
+                                linear-gradient(to left, black 50%, transparent 100%);
             -webkit-mask-composite: source-in;
-            mask-image: linear-gradient(to top left, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 80%),
-                        linear-gradient(to left, black 40%, transparent 100%);
+            mask-image: linear-gradient(to top left, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 90%),
+                        linear-gradient(to left, black 50%, transparent 100%);
             mask-composite: intersect;
             transform: translateY(0);
             will-change: transform;
@@ -2074,35 +2060,30 @@
             let tl = null;
 
             function calculateHeight() {
-                if (!navEl) return 260;
-                const isMobile = window.matchMedia('(max-width: 768px)').matches;
-                if (isMobile) {
-                    if (contentEl) {
-                        const wasVisible = contentEl.style.visibility;
-                        const wasPointerEvents = contentEl.style.pointerEvents;
-                        const wasPosition = contentEl.style.position;
-                        const wasHeight = contentEl.style.height;
+                if (!navEl) return 350;
+                if (contentEl) {
+                    const wasVisible = contentEl.style.visibility;
+                    const wasPointerEvents = contentEl.style.pointerEvents;
+                    const wasPosition = contentEl.style.position;
+                    const wasHeight = contentEl.style.height;
 
-                        contentEl.style.visibility = 'visible';
-                        contentEl.style.pointerEvents = 'auto';
-                        contentEl.style.position = 'static';
-                        contentEl.style.height = 'auto';
+                    contentEl.style.visibility = 'visible';
+                    contentEl.style.pointerEvents = 'auto';
+                    contentEl.style.position = 'static';
+                    contentEl.style.height = 'auto';
 
-                        contentEl.offsetHeight;
+                    const topBar = 60;
+                    const padding = 16;
+                    const contentHeight = contentEl.scrollHeight;
 
-                        const topBar = 60;
-                        const padding = 16;
-                        const contentHeight = contentEl.scrollHeight;
+                    contentEl.style.visibility = wasVisible;
+                    contentEl.style.pointerEvents = wasPointerEvents;
+                    contentEl.style.position = wasPosition;
+                    contentEl.style.height = wasHeight;
 
-                        contentEl.style.visibility = wasVisible;
-                        contentEl.style.pointerEvents = wasPointerEvents;
-                        contentEl.style.position = wasPosition;
-                        contentEl.style.height = wasHeight;
-
-                        return topBar + contentHeight + padding;
-                    }
+                    return topBar + contentHeight + padding;
                 }
-                return 260;
+                return 350;
             }
 
             function createTimeline() {

@@ -1242,111 +1242,134 @@
             }
         }
 
-        /* ── JOURNEY SECTION ─────────────────── */
-        .journey {
+        /* ── TRAJECTORY SECTION ──────────────── */
+        .trajectory-section {
             position: relative;
             padding: 120px 0;
-            overflow: hidden;
         }
 
-        .journey-subsection {
-            margin-bottom: 80px;
+        .trajectory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 48px;
         }
 
-        .journey-subsection:last-child {
-            margin-bottom: 0;
-        }
-
-        .journey-subtitle-heading {
+        .trajectory-title-h2 {
             font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 56px);
             font-weight: 700;
-            font-size: 24px;
-            color: #f0f0f0;
-            margin-bottom: 32px;
-            border-bottom: 1px solid var(--color-border);
-            padding-bottom: 12px;
+            color: var(--color-white);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .trajectory-tabs {
+            display: flex;
+            gap: 28px;
+        }
+
+        .trajectory-tab {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: #555555;
+            background: none;
+            border: none;
+            padding: 8px 0;
+            cursor: pointer;
             text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .trajectory-tab:hover {
+            color: var(--color-white);
+        }
+
+        .trajectory-tab.active {
+            color: var(--color-white);
+        }
+
+        .trajectory-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--color-white);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .trajectory-tab.active::after {
+            transform: scaleX(1);
+        }
+
+        .trajectory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            position: relative;
+        }
+
+        .trajectory-card {
+            position: relative;
+            border-top: 1px solid var(--color-border);
+            padding-top: 32px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .trajectory-card::before {
+            content: '';
+            position: absolute;
+            top: -4px; /* Centered exactly on the 1px border */
+            left: 0;
+            width: 7px;
+            height: 7px;
+            background-color: var(--color-white);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .trajectory-card-date {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: #555555;
+            margin-bottom: 12px;
             letter-spacing: 0.05em;
         }
 
-        /* Education Grid Styles */
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+        .trajectory-card-title {
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
 
-        .education-card {
-            background-color: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 2px;
-            padding: 24px 28px;
-            transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: default;
-        }
-
-        .education-card:hover {
-            border-color: #2a2a2a;
-            transform: translateY(-2px);
-        }
-
-        .journey-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 12px;
-        }
-
-        .journey-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            color: #444444;
-            text-transform: uppercase;
-        }
-
-        .journey-date {
+        .trajectory-card-org {
             font-family: var(--font-mono);
             font-size: 11px;
-            color: #444444;
-        }
-
-        .journey-title {
-            font-family: var(--font-body);
             font-weight: 500;
-            font-size: 17px;
-            color: #f0f0f0;
-            margin-top: 8px;
-            line-height: 1.3;
-        }
-
-        .journey-subtitle {
-            font-family: var(--font-body);
-            font-weight: 400;
-            font-size: 14px;
             color: #666666;
-            font-style: italic;
-            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
         }
 
-        .journey-location,
-        .journey-company {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: #444444;
-            margin-top: 4px;
-        }
-
-        .journey-bullets {
+        .trajectory-card-bullets {
             list-style: none;
             padding: 0;
-            margin: 16px 0 0 0;
+            margin: 0;
         }
 
-        .journey-bullets li {
+        .trajectory-card-bullets li {
             font-family: var(--font-body);
-            font-weight: 400;
             font-size: 14px;
             color: #888888;
             line-height: 1.7;
@@ -1355,138 +1378,51 @@
             margin-bottom: 6px;
         }
 
-        .journey-bullets li::before {
+        .trajectory-card-bullets li::before {
             content: "—";
             position: absolute;
             left: 0;
-            color: #888888;
-        }
-
-        /* Experience Horizontal Timeline Styles */
-        .experience-horizontal-timeline {
-            position: relative;
-            display: flex;
-            gap: 40px;
-            padding-bottom: 60px;
-            width: 100%;
-        }
-
-        .horizontal-spine {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: var(--color-border);
-        }
-
-        .experience-timeline-item {
-            position: relative;
-            flex: 1 1 0%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .experience-card {
-            width: 100%;
-            background-color: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 2px;
-            padding: 24px 28px;
-            transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: default;
-            flex-grow: 1;
-        }
-
-        .experience-card:hover {
-            border-color: #2a2a2a;
-            transform: translateY(-2px);
-        }
-
-        .timeline-connector-vertical {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            width: 1px;
-            height: 40px;
-            background-color: var(--color-border);
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
-        .timeline-dot-horizontal {
-            position: absolute;
-            top: calc(100% + 40px);
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            border: 1px solid #444;
-            background-color: var(--color-bg);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .experience-timeline-item:hover .timeline-dot-horizontal {
-            background-color: #ffffff;
-            border-color: #ffffff;
-        }
-
-        /* Anim offsets for reveal staggers */
-        .reveal-card.left-reveal {
-            opacity: 0;
-            transform: translateY(30px) translateX(-20px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal-card.right-reveal {
-            opacity: 0;
-            transform: translateY(30px) translateX(20px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .grid-stagger.active .reveal-card.left-reveal,
-        .grid-stagger.active .reveal-card.right-reveal {
-            opacity: 1;
-            transform: translateY(0) translateX(0);
+            color: #555555;
         }
 
         @media (max-width: 768px) {
-            .journey {
+            .trajectory-section {
                 padding: 80px 0;
             }
 
-            .journey-subsection {
-                margin-bottom: 48px;
-            }
-
-            .education-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .experience-horizontal-timeline {
+            .trajectory-header {
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 24px;
-                padding-bottom: 0;
+                margin-bottom: 32px;
             }
 
-            .horizontal-spine,
-            .timeline-connector-vertical,
-            .timeline-dot-horizontal {
+            .trajectory-tabs {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 8px;
+                gap: 20px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .trajectory-tabs::-webkit-scrollbar {
                 display: none;
+            }
+
+            .trajectory-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .trajectory-card {
+                padding-top: 24px;
             }
 
             /* Mobile Card Padding Reductions */
             .project-card {
                 padding: 18px 20px;
                 min-height: auto;
-            }
-
-            .education-card,
-            .experience-card {
-                padding: 18px 20px;
             }
 
             #hero-circuit {
@@ -1571,9 +1507,9 @@
                                 <svg class="nav-card-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                                 Tech Skills
                             </a>
-                            <a class="nav-card-link" href="#journey" aria-label="Education & Experience">
+                            <a class="nav-card-link" href="#journey" aria-label="Trajectory and background">
                                 <svg class="nav-card-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                                Journey
+                                Trajectory
                             </a>
                         </div>
                     </div>
@@ -1754,85 +1690,86 @@
             </div>
         </section>
 
-        <!-- ── JOURNEY SECTION ─────────────────── -->
-        <section id="journey" class="journey">
+        <!-- ── TRAJECTORY SECTION ──────────────── -->
+        <section id="journey" class="trajectory-section">
             <div class="container">
-                <div class="section-header">
-                    <div class="reveal-label">// JOURNEY</div>
-                    <h2 class="reveal-heading">Education & Experience</h2>
-                </div>
-                
-                <!-- Education Subsection -->
-                <div class="journey-subsection">
-                    <h3 class="journey-subtitle-heading">Education</h3>
-                    <div class="education-grid grid-stagger">
-                        <!-- Education Card 1 -->
-                        <div class="education-card reveal-card left-reveal">
-                            <div class="journey-card-header">
-                                <span class="journey-badge">Education</span>
-                                <span class="journey-date">Aug 2025 – May 2029</span>
-                            </div>
-                            <h4 class="journey-title">Indian Institute of Technology</h4>
-                            <div class="journey-subtitle">Foundation · BSc in Data Science and Applications</div>
-                            <div class="journey-location">Chennai, Tamil Nadu</div>
-                        </div>
-
-                        <!-- Education Card 2 -->
-                        <div class="education-card reveal-card right-reveal">
-                            <div class="journey-card-header">
-                                <span class="journey-badge">Education</span>
-                                <span class="journey-date">Aug 2025 – May 2029</span>
-                            </div>
-                            <h4 class="journey-title">Government Engineering College Palakkad</h4>
-                            <div class="journey-subtitle">Electronics and Communication Engineering</div>
-                            <div class="journey-location">Palakkad, Kerala</div>
-                        </div>
+                <div class="trajectory-header">
+                    <h2 class="trajectory-title-h2">Trajectory</h2>
+                    <div class="trajectory-tabs" role="tablist">
+                        <button class="trajectory-tab active" data-tab="education" role="tab" aria-selected="true">Education</button>
+                        <button class="trajectory-tab" data-tab="positions" role="tab" aria-selected="false">Positions</button>
+                        <button class="trajectory-tab" data-tab="achievements" role="tab" aria-selected="false">Achievements</button>
                     </div>
                 </div>
+                
+                <div class="trajectory-grid grid-stagger">
+                    <!-- EDUCATION CARDS -->
+                    <div class="trajectory-card reveal-card" data-category="education">
+                        <div class="trajectory-card-date">Aug 2025 – May 2029</div>
+                        <h3 class="trajectory-card-title">BSc in Data Science and Applications</h3>
+                        <div class="trajectory-card-org">Indian Institute of Technology Madras</div>
+                        <ul class="trajectory-card-bullets">
+                            <li>Foundation level program focusing on programming, data analysis, and statistics</li>
+                            <li>Practical application of Python, SQL, and database management systems</li>
+                            <li>Community-driven study groups and technical collaborative projects</li>
+                        </ul>
+                    </div>
 
-                <!-- Experience Subsection -->
-                <div class="journey-subsection">
-                    <h3 class="journey-subtitle-heading">Experience</h3>
-                    <div class="experience-horizontal-timeline grid-stagger">
-                        <div class="horizontal-spine"></div>
-                        
-                        <!-- Experience Card 1 -->
-                        <div class="experience-timeline-item reveal-card left-reveal">
-                            <div class="experience-card">
-                                <div class="journey-card-header">
-                                    <span class="journey-badge">Experience</span>
-                                    <span class="journey-date">February 2026 – Present</span>
-                                </div>
-                                <h4 class="journey-title">IEEE GEC Palakkad SB — Membership Development Coordinator</h4>
-                                <div class="journey-subtitle">IEEE Student Branch, GEC Palakkad</div>
-                                <ul class="journey-bullets">
-                                    <li>Drive recruitment and onboarding of new IEEE members within the college chapter</li>
-                                    <li>Coordinate membership campaigns and engagement activities for the student community</li>
-                                    <li>Collaborate with branch executives to plan technical events and workshops</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-connector-vertical"></div>
-                            <div class="timeline-dot-horizontal"></div>
-                        </div>
+                    <div class="trajectory-card reveal-card" data-category="education">
+                        <div class="trajectory-card-date">Aug 2025 – May 2029</div>
+                        <h3 class="trajectory-card-title">B.Tech in Electronics and Communication Engineering</h3>
+                        <div class="trajectory-card-org">Government Engineering College Palakkad</div>
+                        <ul class="trajectory-card-bullets">
+                            <li>Focusing on core electronics, circuit design, and signal processing</li>
+                            <li>Active participation in hardware development labs and embedded prototyping</li>
+                            <li>Hands-on exploration of microcontroller architectures and analog electronics</li>
+                        </ul>
+                    </div>
 
-                        <!-- Experience Card 2 -->
-                        <div class="experience-timeline-item reveal-card right-reveal">
-                            <div class="experience-card">
-                                <div class="journey-card-header">
-                                    <span class="journey-badge">Experience</span>
-                                    <span class="journey-date">April 2026 – Present</span>
-                                </div>
-                                <h4 class="journey-title">MuLearn GEC Palakkad — IoT Interest Group Lead</h4>
-                                <div class="journey-subtitle">MuLearn, GEC Palakkad</div>
-                                <ul class="journey-bullets">
-                                    <li>Lead and organize IoT-focused technical sessions, workshops, and hands-on events</li>
-                                    <li>Mentor peers in IoT concepts including ESP32, Arduino, and sensor integration</li>
-                                    <li>Build an active learning community around embedded systems and IoT technologies</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-connector-vertical"></div>
-                            <div class="timeline-dot-horizontal"></div>
-                        </div>
+                    <!-- POSITIONS CARDS -->
+                    <div class="trajectory-card reveal-card" data-category="positions">
+                        <div class="trajectory-card-date">Feb 2026 – Present</div>
+                        <h3 class="trajectory-card-title">Membership Development Coordinator</h3>
+                        <div class="trajectory-card-org">IEEE GEC Palakkad Student Branch</div>
+                        <ul class="trajectory-card-bullets">
+                            <li>Drive recruitment and onboarding of new IEEE members within the college chapter</li>
+                            <li>Coordinate campaigns, orientation sessions, and tech engagement events</li>
+                            <li>Collaborate with branch executives to run technical workshops and labs</li>
+                        </ul>
+                    </div>
+
+                    <div class="trajectory-card reveal-card" data-category="positions">
+                        <div class="trajectory-card-date">Apr 2026 – Present</div>
+                        <h3 class="trajectory-card-title">IoT Interest Group Lead</h3>
+                        <div class="trajectory-card-org">MuLearn GEC Palakkad</div>
+                        <ul class="trajectory-card-bullets">
+                            <li>Organize IoT-focused technical sessions, workshops, and hands-on hackathons</li>
+                            <li>Mentor peers in ESP32, Arduino programming, and sensor integration techniques</li>
+                            <li>Cultivate an active learning community for embedded systems and IoT engineering</li>
+                        </ul>
+                    </div>
+
+                    <!-- ACHIEVEMENTS CARDS -->
+                    <div class="trajectory-card reveal-card" data-category="achievements">
+                        <div class="trajectory-card-date">2026</div>
+                        <h3 class="trajectory-card-title">Google Gemini Student Ambassador</h3>
+                        <div class="trajectory-card-org">Google Student Ambassador Program</div>
+                        <ul class="trajectory-card-bullets">
+                            <li>Selected to represent and promote Google Gemini AI capabilities in campus tech events</li>
+                            <li>Deliver presentations, workshops, and guide developers on Gemini API integrations</li>
+                            <li>Explore cutting-edge workflows connecting generative AI models with IoT edge nodes</li>
+                        </ul>
+                    </div>
+
+                    <div class="trajectory-card reveal-card" data-category="achievements">
+                        <div class="trajectory-card-date">2026</div>
+                        <h3 class="trajectory-card-title">Microsoft Imagine Cup MVP</h3>
+                        <div class="trajectory-card-org">Microsoft Imagine Cup MVP Submission</div>
+                        <ul class="trajectory-card-bullets">
+                            <li>Designed an innovative AI-powered accessibility solution for hardware-software systems</li>
+                            <li>Engineered functional prototype integrating edge computing and Azure cloud services</li>
+                            <li>Demonstrated proof-of-concept addressing complex real-world accessibility issues</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -2213,6 +2150,72 @@
                 } else {
                     tl.kill();
                     tl = createTimeline();
+                }
+            });
+
+            // Trajectory tab switching and card filtering with GSAP animations
+            const trajectoryTabs = document.querySelectorAll('.trajectory-tab');
+            const trajectoryCards = document.querySelectorAll('.trajectory-card');
+
+            function filterTrajectoryCategory(category) {
+                const cardsToShow = [];
+                const cardsToHide = [];
+
+                trajectoryCards.forEach(card => {
+                    if (card.getAttribute('data-category') === category) {
+                        cardsToShow.push(card);
+                    } else {
+                        cardsToHide.push(card);
+                    }
+                });
+
+                // Fade out current active cards, then fade in new category cards
+                gsap.to(cardsToHide, {
+                    opacity: 0,
+                    y: 15,
+                    duration: 0.2,
+                    stagger: 0.04,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        cardsToHide.forEach(card => {
+                            card.style.display = 'none';
+                            card.classList.remove('active'); // Reset stagger observer states
+                        });
+
+                        cardsToShow.forEach(card => {
+                            card.style.display = 'block';
+                        });
+
+                        gsap.fromTo(cardsToShow,
+                            { opacity: 0, y: 15 },
+                            { opacity: 1, y: 0, duration: 0.3, stagger: 0.08, ease: 'power2.out' }
+                        );
+                    }
+                });
+            }
+
+            trajectoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    if (tab.classList.contains('active')) return;
+
+                    trajectoryTabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+
+                    const category = tab.getAttribute('data-tab');
+                    filterTrajectoryCategory(category);
+                });
+            });
+
+            // Initial load filter: only show active tab category (education)
+            trajectoryCards.forEach(card => {
+                if (card.getAttribute('data-category') !== 'education') {
+                    card.style.display = 'none';
+                    card.style.opacity = 0;
                 }
             });
 
